@@ -41,6 +41,11 @@ func (a *App) SetDevelopmentMode(mode bool) {
 	a.developmentMode = mode
 }
 
+// InDevMode() returns true when development mode is active.
+func (a *App) InDevMode() bool {
+	return a.developmentMode
+}
+
 // NewApp returns a new App object with default values.
 func NewApp() *App {
 	return &App{
