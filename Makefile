@@ -1,12 +1,19 @@
 appName = webapp
 
-# Run application in development mode.
-dev.run:
-	go run ./cmd/$(appName)/. -devMode
+# Run application command.
+runApp = go run ./cmd/$(appName)/.
 
 # Run application.
 run:
-	go run ./cmd/$(appName)/.
+	$(runApp)
+
+# Run application in development mode.
+dev.run:
+	$(runApp) -dev
+
+# Run application in development mode.
+dev.run.open:
+	$(runApp) -dev -open
 
 # Build application.
 build:
