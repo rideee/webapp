@@ -40,4 +40,5 @@ func (t *Tmpl) Render(w http.ResponseWriter, r *http.Request, tmpl string) {
 		log.Printf("Render->Execute: %v\n", err)
 	}
 
+	// TODO: Template cache.
 }
