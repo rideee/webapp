@@ -10,7 +10,7 @@ import (
 )
 
 // tmpl represents template structure.
-type tmpl struct {
+type Tmpl struct {
 	AppConfig    *config.App
 	TemplateData *struct {
 		Data      map[string]interface{}
@@ -22,14 +22,14 @@ type tmpl struct {
 }
 
 // New creates new tmpl object.
-func New(cfg *config.App) *tmpl {
-	return &tmpl{
+func New(cfg *config.App) *Tmpl {
+	return &Tmpl{
 		AppConfig: cfg,
 	}
 }
 
 // Render renders a template.
-func (t *tmpl) Render(w http.ResponseWriter, r *http.Request, tmpl string) {
+func (t *Tmpl) Render(w http.ResponseWriter, r *http.Request, tmpl string) {
 	parsedTemplate, err := template.ParseFiles(path.Join("web", "template", tmpl))
 	if err != nil {
 		log.Printf("Render: %v\n", err)
