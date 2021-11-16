@@ -4,7 +4,9 @@ import (
 	"flag"
 	"log"
 	"net/http"
+	"time"
 
+	"github.com/gorilla/mux"
 	"github.com/rideee/webapp/internal/config"
 	"github.com/rideee/webapp/internal/tmpl"
 	"github.com/rideee/webapp/pkg/browser"
@@ -24,20 +26,13 @@ func main() {
 	app.Port = *port
 	app.DevelopmentMode = *devMode
 
-	// TODO: For testing only...
-	// Initialize new tmpl object.
-	tpl := tmpl.New(app)
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		tpl.Render(w, r, "homepage.tmpl")
-	})
-
-	// Serve app.
+	// If app is in development mode, log additional info.
 	if app.InDevMode() {
 		log.Println("Application is running in development mode.")
 		log.Println("Server is running on", app.Address())
 	}
 
-	// When flag open is set, open app in web browser.
+	// When flag 'open' is set, open app in web browser.
 	if *openBrowser {
 		url := app.Address()
 		if app.Host == "" {
@@ -47,5 +42,19 @@ func main() {
 		browser.OpenURL(url)
 	}
 
-	log.Fatal(http.ListenAndServe(app.Address(), nil))
+	// Initialize new tmpl object.
+	tpl := tmpl.New(app)
+	// Initialize gorilla/mux router.
+	router := mux.NewRouter()
+	routes(router, tpl)
+
+	// Serv the application.
+	srv := &http.Server{
+		Handler: router,
+		Addr:    app.Address(),
+		// Good practice: enforce timeouts for servers you create!
+		WriteTimeout: 15 * time.Second,
+		ReadTimeout:  15 * time.Second,
+	}
+	log.Fatal(srv.ListenAndServe())
 }
