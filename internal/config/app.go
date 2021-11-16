@@ -6,6 +6,7 @@ import (
 
 // App holds the application config.
 type App struct {
+	Protocol        string
 	Host            string
 	Port            int
 	DevelopmentMode bool
@@ -24,6 +25,7 @@ func (a *App) InDevMode() bool {
 // NewApp returns a new App object with default values.
 func NewApp() *App {
 	return &App{
+		Protocol:        "http",
 		Host:            "",
 		Port:            8080,
 		DevelopmentMode: false,
