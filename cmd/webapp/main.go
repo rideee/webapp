@@ -6,9 +6,9 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/CloudyKit/jet/v6"
 	"github.com/gorilla/mux"
 	"github.com/rideee/webapp/internal/config"
-	"github.com/rideee/webapp/internal/tmpl"
 	"github.com/rideee/webapp/pkg/browser"
 )
 
@@ -26,10 +26,19 @@ func main() {
 	app.Port = *port
 	app.DevelopmentMode = *devMode
 
-	// If app is in development mode, log additional info.
-	if app.InDevMode() {
+	if app.InDevelopmentMode() {
 		log.Println("Application is running in development mode.")
 		log.Println("Server is running on", app.Address())
+
+		// Initialize Jet template engine.
+		app.TemplateEngine = jet.NewSet(
+			jet.NewOSFileSystemLoader(app.TemplateRootDir),
+			jet.InDevelopmentMode(),
+		)
+	} else {
+		app.TemplateEngine = jet.NewSet(
+			jet.NewOSFileSystemLoader(app.TemplateRootDir),
+		)
 	}
 
 	// When flag 'open' is set, open app in web browser.
@@ -42,11 +51,9 @@ func main() {
 		browser.OpenURL(url)
 	}
 
-	// Initialize new tmpl object.
-	tpl := tmpl.New(app)
 	// Initialize gorilla/mux router.
 	router := mux.NewRouter()
-	routes(router, tpl)
+	routes(router, app)
 
 	// Serv the application.
 	srv := &http.Server{
