@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"path"
 
+	"github.com/CloudyKit/jet/v6"
 	"github.com/gorilla/mux"
 	"github.com/rideee/webapp/internal/config"
 )
@@ -20,7 +21,10 @@ func routes(mux *mux.Router, app *config.App) {
 			log.Println("Unexpected template err:", err.Error())
 		}
 
-		view.Execute(w, nil, nil)
+		vars := make(jet.VarMap)
+		vars.Set("pageTitle", "Home")
+
+		view.Execute(w, vars, nil)
 	})
 
 	// Static files.

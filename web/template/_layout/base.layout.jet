@@ -9,7 +9,7 @@
       rel="stylesheet">
     <link rel="stylesheet" href="/static/css/cover.css">
 
-    <title>{{ isset(title) ? title : "" }}</title>
+    <title>{{ isset(pageTitle) ? pageTitle : "WebApp" }}</title>
   </head>
   <body>
     {{ block documentBody() }}{{ end }}
