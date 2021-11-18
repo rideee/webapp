@@ -9,6 +9,7 @@ import (
 	"github.com/CloudyKit/jet/v6"
 	"github.com/gorilla/mux"
 	"github.com/rideee/webapp/internal/config"
+	"github.com/rideee/webapp/internal/handler"
 	"github.com/rideee/webapp/pkg/browser"
 )
 
@@ -51,9 +52,12 @@ func main() {
 		browser.OpenURL(url)
 	}
 
+	// Initialize Handler object.
+	handler := handler.New(app)
+
 	// Initialize gorilla/mux router.
 	router := mux.NewRouter()
-	routes(router, app)
+	routes(router, app, handler)
 
 	// Serv the application.
 	srv := &http.Server{
