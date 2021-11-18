@@ -9,7 +9,7 @@ import (
 func (m *Middleware) Logger(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if m.appConfig.InDevelopmentMode() {
-			log.Printf("New %s %s request from %s.", r.Method, r.RequestURI, r.RemoteAddr)
+			log.Printf("New handled %s '%s' request from %s", r.Method, r.RequestURI, r.RemoteAddr)
 		}
 		next.ServeHTTP(w, r)
 	})
