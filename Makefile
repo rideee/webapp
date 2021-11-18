@@ -8,11 +8,11 @@ run:
 	$(runApp)
 
 # Run application in development mode.
-dev.run:
+run.dev:
 	$(runApp) -dev
 
 # Run application in development mode.
-dev.run.open:
+run.dev.open:
 	$(runApp) -dev -open
 
 # Build application.
