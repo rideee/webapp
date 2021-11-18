@@ -1,0 +1,32 @@
+{{extends "../_layout/base.layout.jet"}}
+
+{{ block documentBody() }}
+<div class="d-flex align-items-center">
+  <main role="main" class="text-center">
+    <h1>CSRF Token Test</h1>
+    <hr>
+
+    <!-- With CSRF Token -->
+    <form action="/test/CSRFToken" method="POST">
+      <input type="hidden" name="message" value="Hidden POST message!">
+      <input type="hidden" name="csrf_token" value="{{ CSRFToken }}">
+      <input style="min-width:200px;" class="btn btn-success" type="submit"
+        value="With Token">
+    </form>
+
+    <!-- No token -->
+    <form action="/test/CSRFToken" method="POST">
+      <input type="hidden" name="message" value="This message should not be
+        visible.">
+      <input style="min-width:200px;" class="mt-2 btn btn-danger" type="submit"
+        value="Without Token" title="Expect: Bad Request">
+    </form>
+
+  </main>
+</div>
+
+<div style="position: fixed; width: 100%; top: 0; text-align: center;
+  margin-top: 30px;">
+  {{ isset(HiddenMessage) ? HiddenMessage : "" }}
+</div>
+{{ end }}
