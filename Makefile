@@ -11,7 +11,7 @@ run:
 run-dev:
 	$(runApp) -dev
 
-# Run application in development mode.
+# Run application in development mode and open it in default web browser.
 run-dev-open:
 	$(runApp) -dev -open
 
