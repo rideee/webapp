@@ -15,6 +15,7 @@ type App struct {
 	DevelopmentMode bool
 	TemplateEngine  *jet.Set
 	TemplateRootDir string
+	CSRFToken       string
 }
 
 // GetAddress returns the host and port in the format host: port (127.0.0.1:8080).

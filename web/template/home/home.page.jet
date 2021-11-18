@@ -2,17 +2,6 @@
 
 {{ block documentBody() }}
 <div class="cover-container d-flex h-100 p-3 mx-auto flex-column text-center">
-  <header class="masthead mb-auto">
-    <div class="inner">
-      <h3 class="masthead-brand">WebApp</h3>
-      <!-- <nav class="nav nav-masthead justify-content-center">
-            <a class="nav-link active" href="#">Home</a>
-            <a class="nav-link" href="#">Features</a>
-            <a class="nav-link" href="#">Contact</a>
-          </nav> -->
-    </div>
-  </header> {* alala *}
-
   <main role="main" class="inner cover">
     <h1 class="cover-heading">Go Web Application</h1>
     <p class="lead">A simple way to be ready to Go :)</p>

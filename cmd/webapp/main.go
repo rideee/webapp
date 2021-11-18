@@ -59,8 +59,8 @@ func main() {
 
 	// Mmiddleware.
 	middleware := middleware.New(app)
-	router.Use()
 	router.Use(middleware.Logger)
+	router.Use(middleware.NoSurf)
 
 	// Initialize Handler object.
 	handler := handler.New(app)

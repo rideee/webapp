@@ -15,6 +15,11 @@ func routes(app *config.App, mux *mux.Router, handler *handler.Handler) {
 	// Homepage route.
 	mux.HandleFunc("/", handler.Home)
 
+	if app.InDevelopmentMode() {
+		// CSRF Token Test routes.
+		mux.HandleFunc("/test/CSRFToken", handler.CSRFTokenTest)
+	}
+
 	// Static files.
 	mux.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir(path.Join("web", "static")))))
 }
