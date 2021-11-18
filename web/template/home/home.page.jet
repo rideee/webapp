@@ -1,23 +1,16 @@
 {{extends "../_layout/base.layout.jet"}}
 
 {{ block documentBody() }}
-<div class="cover-container d-flex h-100 p-3 mx-auto flex-column text-center">
-  <main role="main" class="inner cover">
-    <h1 class="cover-heading">Go Web Application</h1>
-    <p class="lead">A simple way to be ready to Go :)</p>
-    <p class="lead">
-      <a target="_blank" href="https://github.com/rideee/webapp" class="btn
-        btn-lg
-        btn-secondary">GitHub Source</a>
-    </p>
-  </main>
-
-  <footer class="mastfoot mt-auto">
-    <div class="inner">
-      <p>Made by <a style="text-decoration: none;"
-          href="https://github.com/rideee">Rideee</a>
-      </div>
-    </footer>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <main style="background: #00000040;" class="m-auto text-center p-5">
+        <h1>Web Application written in Go</h1>
+        <p class="pt-2">
+          Simple way to be ready to Go!
+        </p>
+      </main>
+    </div>
   </div>
 </div>
 {{ end }}
