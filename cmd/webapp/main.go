@@ -8,6 +8,7 @@ import (
 
 	"github.com/CloudyKit/jet/v6"
 	"github.com/gorilla/mux"
+	"github.com/justinas/nosurf"
 	"github.com/rideee/webapp/internal/config"
 	"github.com/rideee/webapp/internal/handler"
 	"github.com/rideee/webapp/internal/middleware"
@@ -58,6 +59,7 @@ func main() {
 
 	// Mmiddleware.
 	middleware := middleware.New(app)
+	router.Use()
 	router.Use(middleware.Logger)
 
 	// Initialize Handler object.
@@ -68,7 +70,7 @@ func main() {
 
 	// Serv the application.
 	srv := &http.Server{
-		Handler: router,
+		Handler: nosurf.New(router),
 		Addr:    app.Address(),
 		// Good practice: enforce timeouts for servers you create!
 		WriteTimeout: 15 * time.Second,
