@@ -10,6 +10,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/rideee/webapp/internal/config"
 	"github.com/rideee/webapp/internal/handler"
+	"github.com/rideee/webapp/internal/middleware"
 	"github.com/rideee/webapp/pkg/browser"
 )
 
@@ -52,12 +53,18 @@ func main() {
 		browser.OpenURL(url)
 	}
 
+	// Initialize gorilla/mux router.
+	router := mux.NewRouter()
+
+	// Mmiddleware.
+	middleware := middleware.New(app)
+	router.Use(middleware.Logger)
+
 	// Initialize Handler object.
 	handler := handler.New(app)
 
-	// Initialize gorilla/mux router.
-	router := mux.NewRouter()
-	routes(router, app, handler)
+	// Routes.
+	routes(app, router, handler)
 
 	// Serv the application.
 	srv := &http.Server{

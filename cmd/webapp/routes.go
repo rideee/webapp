@@ -10,7 +10,7 @@ import (
 )
 
 // routes keeps all application routes.
-func routes(mux *mux.Router, app *config.App, handler *handler.Handler) {
+func routes(app *config.App, mux *mux.Router, handler *handler.Handler) {
 
 	// Homepage route.
 	mux.HandleFunc("/", handler.Home)
